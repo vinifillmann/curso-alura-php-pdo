@@ -7,10 +7,9 @@ require __DIR__ . "/vendor/autoload.php";
 $pdo = require __DIR__ . "/connection.php";
 
 $statement = $pdo->query("SELECT * FROM students;");
-$studentDataList = $statement->fetchAll(PDO::FETCH_ASSOC);
 $studentList = [];
 
-foreach ($studentDataList as $studentData) {
+while ($studentData = $statement->fetch(PDO::FETCH_ASSOC)) {
     $studentList[] = new Student(
         $studentData["id"],
         $studentData["name"],
